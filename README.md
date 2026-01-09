@@ -10,7 +10,7 @@
 
 ## 収録内容
 
-- **presentation.html**
+- **index.html**
   - 導入提案プレゼンテーション資料（Webブラウザで閲覧可能）
   - キーボードの矢印キー（←/→）またはクリック・タップでスライド操作が可能です。
 
@@ -23,4 +23,4 @@
 ## 閲覧方法
 
 1. リポジトリをダウンロード（またはクローン）してください。
-2. `presentation.html` をお使いのWebブラウザ（Chrome, Safari, Edge等）で開いてください。
+2. `index.html` をお使いのWebブラウザ（Chrome, Safari, Edge等）で開いてください。
