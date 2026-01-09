@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3Dプリンター導入・機材購入 提案資料</title>
+    <meta name="description" content="劇団フルーツバスケットの舞台小道具制作を革新する、Bambu Lab 3Dプリンター導入提案">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="3Dプリンター導入提案 | 劇団フルーツバスケット">
+    <meta property="og:description" content="舞台制作を次のレベルへ。3Dプリンター導入による制作革新の提案">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="nav-content">
+            <div class="nav-brand">3D Printer</div>
+            <div class="nav-links">
+                <a href="#hero">トップ</a>
+                <a href="#what-is">3Dプリンターとは</a>
+                <a href="#purpose">導入目的</a>
+                <a href="#selection">機種選定</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <div class="hero-content animate-on-scroll">
+                <h1 class="hero-title">
+                    舞台制作を<br>
+                    <span class="gradient-text">次のレベルへ</span>
+                </h1>
+                <p class="hero-subtitle">3Dプリンター導入による制作革新の提案</p>
+                <div class="hero-cta">
+                    <a href="#what-is" class="btn btn-primary">詳しく見る</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-bg-animation"></div>
+    </section>
+
+    <!-- What is 3D Printer -->
+    <section id="what-is" class="section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">
+                <span class="section-number">01</span>
+                3Dプリンターとは
+            </h2>
+            <div class="content-grid">
+                <div class="glass-card animate-on-scroll">
+                    <div class="card-icon">🖨️</div>
+                    <h3>デジタルから実物へ</h3>
+                    <p>3Dデータ（立体設計図）をもとに、材料を積層して立体物を造形する製造装置です。</p>
+                </div>
+                <div class="glass-card animate-on-scroll" style="animation-delay: 0.1s">
+                    <div class="card-icon">✨</div>
+                    <h3>加算製造</h3>
+                    <p>切削ではなく<strong>加算製造（Additive Manufacturing）</strong>である点が最大の特徴です。</p>
+                </div>
+            </div>
+            
+            <div class="feature-list animate-on-scroll">
+                <div class="feature-item">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-content">
+                        <h4>一点物・少量生産に強い</h4>
+                        <p>型が不要なため、1個から作れます</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-content">
+                        <h4>修正・再制作が即時可能</h4>
+                        <p>データ修正後、すぐに再出力できます</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💾</div>
+                    <div class="feature-content">
+                        <h4>データが資産として蓄積</h4>
+                        <p>一度作れば、いつでも再利用可能</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box animate-on-scroll">
+                <div class="highlight-icon">🎭</div>
+                <p><strong>舞台小道具制作のような「毎回違う」「直前変更が多い」制作現場と非常に相性が良い技術です。</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FDM Method -->
+    <section id="fdm" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">
+                <span class="section-number">02</span>
+                製造方法：FDM方式
+            </h2>
+            <p class="section-intro animate-on-scroll">
+                今回検討している Bambu Lab の主力機は<strong>FDM方式（熱溶解積層方式）</strong>を採用しています。
+            </p>
+
+            <div class="process-steps">
+                <div class="step-card animate-on-scroll">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">🧵</div>
+                    <h3>フィラメント加熱</h3>
+                    <p>樹脂の糸を200℃前後に加熱</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step-card animate-on-scroll" style="animation-delay: 0.1s">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">💧</div>
+                    <h3>ノズルから押し出し</h3>
+                    <p>溶けた樹脂を細いノズルから押し出す</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step-card animate-on-scroll" style="animation-delay: 0.2s">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">📚</div>
+                    <h3>薄い層を積み重ね</h3>
+                    <p>一層ずつ丁寧に積層</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step-card animate-on-scroll" style="animation-delay: 0.3s">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">✅</div>
+                    <h3>立体物が完成</h3>
+                    <p>冷えて固まり完成</p>
+                </div>
+            </div>
+
+            <div class="quality-comparison animate-on-scroll">
+                <div class="comparison-card">
+                    <h4>細かい積層</h4>
+                    <div class="comparison-tags">
+                        <span class="tag tag-blue">滑らか</span>
+                        <span class="tag tag-purple">展示向き</span>
+                        <span class="tag tag-orange">時間長</span>
+                    </div>
+                    <p>見た目重視の造形に最適</p>
+                </div>
+                <div class="comparison-card">
+                    <h4>粗い積層</h4>
+                    <div class="comparison-tags">
+                        <span class="tag tag-green">高速</span>
+                        <span class="tag tag-blue">強度向き</span>
+                        <span class="tag tag-purple">量産向き</span>
+                    </div>
+                    <p>スピード重視の造形に最適</p>
+                </div>
+            </div>
+
+            <div class="highlight-box animate-on-scroll">
+                <p><strong>用途に応じて「見た目」「強度」「スピード」を意図的に切り替えられることが重要です。</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Purpose -->
+    <section id="purpose" class="section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">
+                <span class="section-number">03</span>
+                3Dプリンター導入の目的
+            </h2>
+
+            <div class="purpose-grid">
+                <div class="purpose-card animate-on-scroll">
+                    <div class="purpose-header">
+                        <div class="purpose-icon">🎭</div>
+                        <h3>舞台小道具制作</h3>
+                    </div>
+                    <ul class="purpose-list">
+                        <li>
+                            <span class="list-icon">✓</span>
+                            <div>
+                                <strong>再現性の確保</strong>
+                                <p>同じものを何度でも正確に製作</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="list-icon">✓</span>
+                            <div>
+                                <strong>修正・再出力の高速化</strong>
+                                <p>直前変更にも即座に対応</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="list-icon">✓</span>
+                            <div>
+                                <strong>外注・手作業依存からの脱却</strong>
+                                <p>社内で完結する制作体制</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="purpose-card animate-on-scroll" style="animation-delay: 0.1s">
+                    <div class="purpose-header">
+                        <div class="purpose-icon">🎁</div>
+                        <h3>オリジナルグッズ制作</h3>
+                    </div>
+                    <ul class="purpose-list">
+                        <li>
+                            <span class="list-icon">✓</span>
+                            <div>
+                                <strong>少量多品種対応</strong>
+                                <p>小ロットでも経済的に制作</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="list-icon">✓</span>
+                            <div>
+                                <strong>試作コスト削減</strong>
+                                <p>何度でも試作・改良が可能</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="list-icon">✓</span>
+                            <div>
+                                <strong>物販・記念品への展開</strong>
+                                <p>新たな収益源の創出</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Bambu Lab -->
+    <section id="why-bambu" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">
+                <span class="section-number">04</span>
+                Bambu Lab を選定する理由
+            </h2>
+            
+            <div class="intro-text animate-on-scroll">
+                <p>Bambu Lab は、3Dプリンターを「試行錯誤を楽しむ工作機械」ではなく、<strong>導入直後から成果を出すための制作設備</strong>として設計したメーカーです。</p>
+            </div>
+
+            <div class="reason-grid">
+                <div class="reason-card animate-on-scroll">
+                    <div class="reason-number">01</div>
+                    <div class="reason-icon">🎯</div>
+                    <h3>自動キャリブレーションによる<br>失敗率の低さ</h3>
+                    <p>専門知識がなくても、初回から高品質な造形が可能。調整不要で即戦力になります。</p>
+                </div>
+
+                <div class="reason-card animate-on-scroll" style="animation-delay: 0.1s">
+                    <div class="reason-number">02</div>
+                    <div class="reason-icon">⚡</div>
+                    <h3>高速造形でも<br>品質が安定</h3>
+                    <p>他社の2〜3倍の速度でも、高い精度を維持。納期に追われる制作現場に最適です。</p>
+                </div>
+
+                <div class="reason-card animate-on-scroll" style="animation-delay: 0.2s">
+                    <div class="reason-number">03</div>
+                    <div class="reason-icon">📚</div>
+                    <h3>日本語情報が豊富で<br>組織運用向き</h3>
+                    <p>導入から運用、トラブル対応まで日本語環境で完結。属人化を防ぎます。</p>
+                </div>
+            </div>
+
+            <div class="highlight-box animate-on-scroll">
+                <div class="highlight-icon">💡</div>
+                <p><strong>目的が「学習」ではなく「制作を前に進めること」である以上、Bambu Labは最も合理的な選定です。</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Model Selection -->
+    <section id="selection" class="section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">
+                <span class="section-number">05</span>
+                機種選定
+            </h2>
+
+            <div class="table-container animate-on-scroll">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>機種</th>
+                            <th>特徴</th>
+                            <th>造形サイズ</th>
+                            <th>ノズル</th>
+                            <th>価格</th>
+                            <th>判断</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="excluded">
+                            <td>Bambu Lab P2S</td>
+                            <td>エントリー</td>
+                            <td>256³ mm</td>
+                            <td>シングル</td>
+                            <td>¥148,000</td>
+                            <td><span class="badge badge-gray">除外</span></td>
+                        </tr>
+                        <tr>
+                            <td>Bambu Lab H2S</td>
+                            <td>大型・高速</td>
+                            <td>350×320×325 mm</td>
+                            <td>シングル</td>
+                            <td>¥249,800</td>
+                            <td><span class="badge badge-blue">候補</span></td>
+                        </tr>
+                        <tr class="recommended">
+                            <td><strong>Bambu Lab H2D</strong></td>
+                            <td><strong>デュアルノズル</strong></td>
+                            <td>350×320×325 mm</td>
+                            <td><strong>デュアル</strong></td>
+                            <td><strong>¥399,800</strong></td>
+                            <td><span class="badge badge-green">本命</span></td>
+                        </tr>
+                        <tr>
+                            <td>H2D＋Laser 10W</td>
+                            <td>切断・刻印対応</td>
+                            <td>同上</td>
+                            <td>デュアル</td>
+                            <td>¥495,600</td>
+                            <td><span class="badge badge-purple">拡張</span></td>
+                        </tr>
+                        <tr>
+                            <td>H2D＋Laser 40W</td>
+                            <td>高出力レーザー</td>
+                            <td>同上</td>
+                            <td>デュアル</td>
+                            <td>¥598,600</td>
+                            <td><span class="badge badge-orange">過剰</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="dual-nozzle-section animate-on-scroll">
+                <h3 class="subsection-title">H2D（デュアルノズル）を重視する理由</h3>
+                <div class="dual-grid">
+                    <div class="dual-card">
+                        <div class="dual-visual">
+                            <div class="nozzle nozzle-1">ノズル①<br>製品用</div>
+                            <div class="nozzle nozzle-2">ノズル②<br>サポート材</div>
+                        </div>
+                    </div>
+                    <div class="dual-benefits">
+                        <div class="benefit-item">
+                            <span class="benefit-icon">✨</span>
+                            <div>
+                                <strong>サポート面が非常に綺麗</strong>
+                                <p>専用サポート材で美しい仕上がり</p>
+                            </div>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">⏱️</span>
+                            <div>
+                                <strong>削り・研磨工程を削減</strong>
+                                <p>後処理時間を大幅に短縮</p>
+                            </div>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">💰</span>
+                            <div>
+                                <strong>後処理工数が大幅に減る</strong>
+                                <p>人件費・時間コストを削減</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="highlight-box">
+                    <p><strong>舞台制作では「プリント後の仕上げ時間」こそが最大のコスト。デュアルノズルは実務向きです。</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Materials -->
+    <section id="materials" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">
+                <span class="section-number">06</span>
+                フィラメント構成
+            </h2>
+
+            <div class="materials-grid">
+                <div class="material-section animate-on-scroll">
+                    <h3 class="material-title">造形用フィラメント</h3>
+                    <div class="material-cards">
+                        <div class="material-card">
+                            <div class="material-name">PLA</div>
+                            <div class="material-feature">硬い・軽い・扱いやすい</div>
+                            <div class="material-use">試作・装飾</div>
+                        </div>
+                        <div class="material-card">
+                            <div class="material-name">PETG</div>
+                            <div class="material-feature">割れにくい</div>
+                            <div class="material-use">実用品</div>
+                        </div>
+                        <div class="material-card">
+                            <div class="material-name">ASA</div>
+                            <div class="material-feature">耐熱・耐候</div>
+                            <div class="material-use">屋外舞台</div>
+                        </div>
+                        <div class="material-card">
+                            <div class="material-name">TPU</div>
+                            <div class="material-feature">ゴムのように柔らかい</div>
+                            <div class="material-use">グリップ・可動部</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="material-section animate-on-scroll" style="animation-delay: 0.1s">
+                    <h3 class="material-title">サポート材</h3>
+                    <div class="material-cards">
+                        <div class="material-card">
+                            <div class="material-name">PLA Support</div>
+                            <div class="material-feature">PLA専用・剥がしやすい</div>
+                            <div class="material-status">検討中</div>
+                        </div>
+                        <div class="material-card">
+                            <div class="material-name">PA/PETG Support</div>
+                            <div class="material-feature">上位互換・高価</div>
+                            <div class="material-status">参考</div>
+                        </div>
+                        <div class="material-card recommended">
+                            <div class="material-name">PVA（水溶性）</div>
+                            <div class="material-feature">水で溶ける・後処理最小</div>
+                            <div class="material-status">おすすめ</div>
+                        </div>
+                        <div class="material-card">
+                            <div class="material-name">BVOH</div>
+                            <div class="material-feature">高性能だが非常に高価</div>
+                            <div class="material-status">参考</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box animate-on-scroll">
+                <p><strong>H2D＋水溶性サポートは、複雑形状の成功率と仕上がりを最優先する構成。</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Summary -->
+    <section id="summary" class="section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">
+                <span class="section-number">08</span>
+                構成まとめ
+            </h2>
+
+            <div class="summary-card animate-on-scroll">
+                <div class="summary-header">
+                    <h3>提案する導入構成</h3>
+                    <p>舞台制作における「成功率」「仕上げ工数」「再現性」を最優先</p>
+                </div>
+                
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <div class="summary-label">本体</div>
+                        <div class="summary-value">Bambu Lab H2D<br><span class="summary-sub">（デュアルノズル）</span></div>
+                        <div class="summary-price">¥399,800</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">造形材</div>
+                        <div class="summary-value">PLA / TPU</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">サポート材</div>
+                        <div class="summary-value">PLA Support / PVA</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">周辺機材</div>
+                        <div class="summary-value">0.6mmホットエンド<br>クリーニングニードル</div>
+                    </div>
+                </div>
+
+                <div class="summary-footer">
+                    <p>この構成により、プリント後の仕上げ時間を大幅に削減し、<br>制作現場における即戦力として機能します。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>3Dプリンター導入提案資料</p>
+            <p class="footer-sub">劇団フルーツバスケット</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

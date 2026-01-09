@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3Dプリンター導入提案 - 劇団フルーツバスケット</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Outfit:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            /* Light Mode Variables */
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --accent-color: #0066cc;
+            --accent-gradient: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+            --slide-padding: 4rem;
+            --card-bg: rgba(0, 0, 0, 0.03);
+            --card-border: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .slides-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: scale(0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: var(--slide-padding);
+            text-align: center;
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+            z-index: 2;
+        }
+
+        .slide-content {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+        }
+
+        h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: #111;
+        }
+
+        h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #444;
+        }
+
+        p {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .highlight {
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        ul {
+            text-align: left;
+            display: inline-block;
+            font-size: 1.5rem;
+            line-height: 1.8;
+            color: #555;
+            list-style-type: none;
+        }
+
+        li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        li::before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* Custom visuals for slides */
+        .visual-box {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .visual-img {
+            max-width: 80%;
+            height: auto;
+            max-height: 400px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            display: block;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 2rem;
+            width: 300px;
+            backdrop-filter: blur(10px);
+            text-align: left;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #222;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 0;
+            line-height: 1.5;
+        }
+
+        /* Navigation controls */
+        .controls {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 1rem;
+            z-index: 10;
+        }
+
+        .btn {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #333;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .btn:hover {
+            background: var(--accent-color);
+            color: #fff;
+            transform: scale(1.1);
+            border-color: transparent;
+        }
+
+        .btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            background: transparent;
+        }
+
+        .progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: var(--accent-gradient);
+            width: 0%;
+            transition: width 0.3s ease;
+            z-index: 10;
+        }
+
+        .slide-number {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            font-size: 1rem;
+            color: #999;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            p {
+                font-size: 1.1rem;
+            }
+
+            .card {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            :root {
+                --slide-padding: 2rem;
+            }
+
+            .visual-img {
+                max-height: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="slide-number" id="slideNumber">1 / 10</div>
+
+    <div class="slides-container">
+
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <div class="slide-content">
+                <p style="letter-spacing: 0.2em; text-transform: uppercase; color: #666;">2026年度 設備投資計画</p>
+                <h1>3Dプリンター導入・機材購入<br>提案資料（統合版）</h1>
+                <p>劇団フルーツバスケット 小道具制作チーム</p>
+                <div style="margin-top: 3rem;">
+                    <img src="./assets/modern_printer.png" alt="Modern 3D Printer" class="visual-img"
+                        style="max-height: 300px; box-shadow: none;">
+                    <p style="font-size: 1rem; margin-top: 1rem; opacity: 0.6;">キー操作: ← / → で移動</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: What is 3D Printer -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>1. 3Dプリンターとは</h2>
+                <p>3Dデータをもとに材料を積層して造形する装置。<br>
+                    <span class="highlight">「加算製造（Additive Manufacturing）」</span>が最大の特徴。
+                </p>
+
+                <div style="margin: 2rem auto;">
+                    <img src="./assets/additive_vs_subtractive.png" alt="Additive vs Subtractive" class="visual-img">
+                </div>
+
+                <ul style="font-size: 1.3rem;">
+                    <li><strong>一点物・少量生産に強い</strong></li>
+                    <li><strong>修正・再制作が即時可能</strong></li>
+                    <li><strong>データが資産として蓄積される</strong></li>
+                </ul>
+                <div
+                    style="margin-top: 2rem; background: var(--accent-gradient); color: white; padding: 1rem 2rem; border-radius: 50px; display: inline-block;">
+                    舞台制作の「毎回違う」「直前変更」と相性抜群
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Method (FDM) -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>2. 製造方法（FDM方式）</h2>
+                <p>Bambu Labの主力機は<strong>FDM（熱溶解積層方式）</strong>を採用。<br>
+                    樹脂を溶かして、一層ずつ積み上げます。</p>
+
+                <div class="visual-box">
+                    <div class="card">
+                        <div class="card-title">仕組み</div>
+                        <p class="card-text">
+                            1. フィラメント（糸）を加熱<br>
+                            2. ノズルから押し出す<br>
+                            3. 冷えて固まる
+                        </p>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">クオリティ調整</div>
+                        <p class="card-text">
+                            <strong>細かい積層</strong>：滑らか・展示向き<br>
+                            <strong>粗い積層</strong>：高速・強度向き
+                        </p>
+                    </div>
+                </div>
+                <p style="margin-top: 2rem; font-size: 1.2rem;">
+                    用途に応じて「見た目」「強度」「スピード」を意図的に切り替え可能。
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 4: Purpose -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>3. 3Dプリンター導入の目的</h2>
+
+                <div style="display: flex; gap: 2rem; justify-content: center; margin-top: 2rem; text-align: left;">
+                    <div class="card" style="width: 450px;">
+                        <span class="card-icon">🎭</span>
+                        <div class="card-title">1. 舞台小道具制作</div>
+                        <ul style="font-size: 1.1rem; line-height: 1.6;">
+                            <li><strong>再現性の確保</strong>：手作業のバラつきをゼロに</li>
+                            <li><strong>高速化</strong>：修正・再出力を迅速に</li>
+                            <li><strong>脱・属人化</strong>：外注や特定個人の技術に依存しない</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="width: 450px;">
+                        <span class="card-icon">📦</span>
+                        <div class="card-title">2. オリジナルグッズ展開</div>
+                        <ul style="font-size: 1.1rem; line-height: 1.6;">
+                            <li><strong>少量多品種</strong>：在庫リスクなしで制作</li>
+                            <li><strong>試作コスト減</strong>：気軽にプロトタイピング</li>
+                            <li><strong>物販・記念品</strong>：新たな収益源への可能性</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Why Bambu Lab (Selection) -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>4. Bambu Lab を選定する理由</h2>
+                <p>他社メーカーと比較して、<br>
+                    <span class="highlight">「機材調整」ではなく「制作そのもの」</span>に時間を使える唯一の選択肢。
+                </p>
+
+                <div style="overflow-x: auto; margin: 2rem auto; max-width: 1000px;">
+                    <table style="width: 100%; border-collapse: separate; border-spacing: 0; font-size: 1.1rem;">
+                        <thead>
+                            <tr style="background: var(--card-bg);">
+                                <th style="padding: 1rem; border-radius: 10px 0 0 10px; border-bottom: 2px solid #ddd;">
+                                    比較項目</th>
+                                <th style="padding: 1rem; border-bottom: 2px solid #ddd;">格安キット系<br><span
+                                        style="font-size:0.8rem; font-weight:normal;">(Creality等)</span></th>
+                                <th style="padding: 1rem; border-bottom: 2px solid #ddd;">従来の実績機<br><span
+                                        style="font-size:0.8rem; font-weight:normal;">(Prusa/Flashforge等)</span></th>
+                                <th
+                                    style="padding: 1rem; border-radius: 0 10px 10px 0; border-bottom: 2px solid var(--accent-color); background: rgba(0, 102, 204, 0.1); color: var(--accent-color);">
+                                    Bambu Lab</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 1rem; font-weight: bold; border-bottom: 1px solid #eee;">導入目的</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">安く学びたい<br><span
+                                        style="color:#999; font-size:0.9rem;">(改造・調整が主)</span></td>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">教育・研究<br><span
+                                        style="color:#999; font-size:0.9rem;">(安定だが遅い/高い)</span></td>
+                                <td
+                                    style="padding: 1rem; border-bottom: 1px solid #eee; background: rgba(0, 102, 204, 0.03); font-weight: bold;">
+                                    即戦力・実務<br><span
+                                        style="color:var(--accent-color); font-size:0.9rem;">(調整不要・超高速)</span></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem; font-weight: bold; border-bottom: 1px solid #eee;">調整コスト</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">高い<br><span
+                                        style="color:#999; font-size:0.9rem;">(手動補正・失敗多い)</span></td>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">中<br><span
+                                        style="color:#999; font-size:0.9rem;">(初期設定は必要)</span></td>
+                                <td
+                                    style="padding: 1rem; border-bottom: 1px solid #eee; background: rgba(0, 102, 204, 0.03); font-weight: bold;">
+                                    ほぼゼロ<br><span style="color:var(--accent-color); font-size:0.9rem;">(全自動AI補正)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem; font-weight: bold; border-bottom: 1px solid #eee;">多色・異素材</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">困難<br><span
+                                        style="color:#999; font-size:0.9rem;">(改造が必要)</span></td>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">可能<br><span
+                                        style="color:#999; font-size:0.9rem;">(オプションが高価)</span></td>
+                                <td
+                                    style="padding: 1rem; border-bottom: 1px solid #eee; background: rgba(0, 102, 204, 0.03); font-weight: bold;">
+                                    標準対応<br><span
+                                        style="color:var(--accent-color); font-size:0.9rem;">(AMSシステム優秀)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="background: rgba(0,0,0,0.03); padding: 1.5rem; border-radius: 12px; display: inline-block;">
+                    <p style="margin: 0; font-size: 1.1rem; color: #555;">
+                        安価なプリンターは「プリンター自体の世話」に時間が取られます。<br>
+                        我々の目的は<strong>「小道具を作ること」</strong>であり、機械の調整ではありません。<br>
+                        だからこそ、<strong>「家電のように使える」</strong>Bambu Lab一択となります。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Configuration Candidates -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>5-1. 本体候補の比較（スペック詳細）</h2>
+                <div
+                    style="overflow-x: auto; margin-top: 1rem; max-width: 1100px; margin-left: auto; margin-right: auto;">
+                    <table
+                        style="width: 100%; border-collapse: collapse; font-size: 0.95rem; color: #333; white-space: nowrap;">
+                        <thead style="background: var(--card-bg); font-weight: bold;">
+                            <tr>
+                                <th style="padding: 1rem; border-bottom: 2px solid #ddd;">機種</th>
+                                <th style="padding: 1rem; border-bottom: 2px solid #ddd;">特徴</th>
+                                <th style="padding: 1rem; border-bottom: 2px solid #ddd;">価格</th>
+                                <th style="padding: 1rem; border-bottom: 2px solid #ddd;">判断</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">P2S</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">エントリー</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">¥148,000〜</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee; color: #999;">スペック不足</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">H2S</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">大型・高速</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">¥249,800〜</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">単体造形向き</td>
+                            </tr>
+                            <tr style="background: rgba(0, 102, 204, 0.1); font-weight: bold;">
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee; color: var(--accent-color);">
+                                    H2D</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">デュアルノズル</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">¥399,800〜</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee; color: var(--accent-color);">
+                                    本命候補</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">H2D+Laser</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">レーザー機能</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">¥495,600〜</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid #eee;">初期導入は見送り</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="margin-top: 1rem; font-size: 0.9rem; color: #666; text-align: left;">
+                    ※Bambu Lab H2シリーズは大型造形（350mmクラス）に対応しており、甲冑や長物プロップの分割数を減らせます。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Why H2D? (Dual Focus) -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>5-2. なぜ「H2D（デュアル）」なのか</h2>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+                <img src="./assets/dual_nozzle_refined.png" alt="Dual Nozzle Diagram" class="visual-img"
+                    style="max-height: 250px;">
+            </div>
+
+            <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 2rem; text-align: left;">
+                <div style="max-width: 400px;">
+                    <h3 style="color: var(--accent-color); font-size: 1.5rem;">サポート材専用ノズルの威力</h3>
+                    <p style="font-size: 1.1rem;">
+                        2本目のノズルで「サポート材（足場）」だけを出力。<br>
+                        本体と足場が違う材料なので、接地面が癒着せず、<strong>手でパキッと剥がせます。</strong>
+                    </p>
+                    <ul style="font-size: 1rem; margin-top: 1rem;">
+                        <li>もう、ニッパーで格闘する必要はありません。</li>
+                        <li>ヤスリがけの時間も不要になります。</li>
+                        <li><a href="https://jp.store.bambulab.com/products/support-for-pla-new" target="_blank"
+                                style="color: var(--accent-color); text-decoration: underline;">詳しくはこちら（公式：専用サポート材について）</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <p
+                style="margin-top: 2rem; font-weight: bold; background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 8px; display: inline-block;">
+                制作時間を、仕上げ時間で台無しにしないための必須機能です。
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 8: Materials -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>6. フィラメント（材料）構成</h2>
+
+            <div class="visual-box">
+                <div class="card" style="width: 400px;">
+                    <div class="card-title">造形用フィラメント</div>
+                    <ul style="font-size: 1rem; margin-top: 0.5rem; line-height: 1.4;">
+                        <li><strong>PLA</strong>：硬い・軽い・扱いやすい（基本）</li>
+                        <li><strong>PETG</strong>：割れにくい（実用品）</li>
+                        <li><strong>ASA</strong>：耐熱・耐候（屋外向き）</li>
+                        <li><strong>TPU</strong>：ゴムのように柔らかい（可動部）</li>
+                    </ul>
+                </div>
+                <div class="card" style="width: 400px; border-color: var(--accent-color);">
+                    <div class="card-title">サポート用材</div>
+                    <ul style="font-size: 1rem; margin-top: 0.5rem; line-height: 1.4;">
+                        <li><strong>PLA Support</strong>：剥がしやすい専用材</li>
+                        <li><strong>PVA（水溶性）</strong>：水で溶ける（複雑形状用）</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="margin-top: 2rem;">
+                「H2D ＋ 水溶性サポート」は、成功率と仕上がりを最優先する構成です。
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 9: Peripherals -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>7. 周辺機材・消耗品</h2>
+            <div style="display: flex; gap: 2rem; justify-content: center; margin-top: 2rem;">
+                <div class="card">
+                    <div
+                        style="height: 150px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                        <img src="./assets/FAH024_400x.webp" alt="0.6mm Hotend"
+                            style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                    </div>
+                    <div class="card-title">0.6mm ホットエンド</div>
+                    <p class="card-text">
+                        標準(0.4mm)より太いノズル。<br>
+                        高速造形・強度重視。<br>
+                        大型の小道具制作に最適。
+                    </p>
+                </div>
+                <div class="card">
+                    <div
+                        style="height: 150px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                        <img src="./assets/61wuG2xOO6L._AC_SY300_SX300_QL70_ML2_.jpg" alt="Cleaning Needle"
+                            style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                    </div>
+                    <div class="card-title">クリーニングニードル</div>
+                    <p class="card-text">
+                        ノズル詰まりの即時解消。<br>
+                        突発的な停止を回避するための<br>
+                        「止まらない運用」の必需品。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Conclusion -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>8. 構成まとめ（提案結論）</h2>
+            <div
+                style="background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 68, 153, 0.02) 100%); border: 2px solid var(--accent-color); border-radius: 20px; padding: 3rem; margin-top: 2rem;">
+                <ul style="text-align: left; font-size: 1.4rem; list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 1.5rem; padding-left: 2rem; position: relative;">
+                        <span style="position: absolute; left: 0; color: var(--accent-color);">●</span>
+                        <strong>本体：</strong> <span
+                            style="font-size: 1.8rem; font-weight: bold; color: var(--accent-color);">Bambu Lab
+                            H2D</span> （デュアルノズル）
+                    </li>
+                    <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
+                        <span style="position: absolute; left: 0; color: var(--accent-color);">●</span>
+                        <strong>造形材：</strong> PLA / TPU
+                    </li>
+                    <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
+                        <span style="position: absolute; left: 0; color: var(--accent-color);">●</span>
+                        <strong>サポート材：</strong> PLA Support / PVA
+                    </li>
+                    <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
+                        <span style="position: absolute; left: 0; color: var(--accent-color);">●</span>
+                        <strong>周辺：</strong> 0.6mmホットエンド / クリーニングニードル
+                    </li>
+                </ul>
+                <hr style="border: 0; height: 1px; background: #ddd; margin: 2rem 0;">
+                <p style="font-weight: bold; font-size: 1.2rem;">
+                    現場における「成功率」「仕上げ工数削減」「再現性」を<br>
+                    最優先した構成による提案です。
+                </p>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+        <button class="btn" id="prevBtn" title="Previous Slide">←</button>
+        <button class="btn" id="nextBtn" title="Next Slide">→</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const progressBar = document.getElementById('progressBar');
+            const slideNumber = document.getElementById('slideNumber');
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function updateSlide(index) {
+                // Bounds check
+                if (index < 0) index = 0;
+                if (index >= totalSlides) index = totalSlides - 1;
+
+                // Update active class
+                slides.forEach((slide, i) => {
+                    slide.classList.remove('active');
+                    if (i === index) {
+                        slide.classList.add('active');
+                    }
+                });
+
+                currentSlide = index;
+
+                // Update buttons
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+
+                // Update progress bar
+                const progress = ((currentSlide + 1) / totalSlides) * 100;
+                progressBar.style.width = `${progress}%`;
+
+                // Update number
+                slideNumber.textContent = `${currentSlide + 1} / ${totalSlides}`;
+            }
+
+            // Button Listeners
+            prevBtn.addEventListener('click', () => updateSlide(currentSlide - 1));
+            nextBtn.addEventListener('click', () => updateSlide(currentSlide + 1));
+
+            // Keyboard Listeners
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') updateSlide(currentSlide - 1);
+                if (e.key === 'ArrowRight' || e.key === ' ') updateSlide(currentSlide + 1);
+            });
+
+            // Mobile Touch Listeners for Swipe
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            document.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            document.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+
+            function handleSwipe() {
+                if (touchEndX < touchStartX - 50) {
+                    // Swipe Left (Next)
+                    updateSlide(currentSlide + 1);
+                }
+                if (touchEndX > touchStartX + 50) {
+                    // Swipe Right (Prev)
+                    updateSlide(currentSlide - 1);
+                }
+            }
+
+            // Init
+            updateSlide(0);
+        });
+    </script>
+</body>
+
+</html>
